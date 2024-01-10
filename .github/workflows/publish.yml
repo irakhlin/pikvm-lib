@@ -10,6 +10,7 @@
 name: Publish Python distribution to PyPI and Github
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
@@ -34,32 +35,33 @@ jobs:
           name: python-package-distributions
           path: dist/
 
-  pypi-publish:
-    name: Upload release to PyPI
-    needs:
-    - build
-    runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/pikvm-lib
-    permissions:
-      id-token: write
-    steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v3
-      with:
-        name: python-package-distributions
-        path: dist/
+  # pypi-publish:
+  #   name: Upload release to PyPI
+  #   needs:
+  #   - build
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: pypi
+  #     url: https://pypi.org/p/pikvm-lib
+  #   permissions:
+  #     id-token: write
+  #   steps:
+  #   - name: Download all the dists
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: python-package-distributions
+  #       path: dist/
 
-    - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        skip-existing: true
+  #   - name: Publish package distributions to PyPI
+  #     uses: pypa/gh-action-pypi-publish@release/v1
+  #     with:
+  #       skip-existing: true
 
   github-release:
     name: Sign the Python distribution with Sigstore and upload them to GitHub Release
     needs:
-    - pypi-publish
+    - build
+    #- pypi-publish
     runs-on: ubuntu-latest
 
     permissions:
