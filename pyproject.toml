@@ -30,8 +30,8 @@ requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/guanana/pikvm-lib"
-Issues = "https://github.com/guanana/pikvm-lib/issues"
+Homepage = "https://github.com/irakhlin/pikvm-lib"
+Issues = "https://github.com/irakhlin/pikvm-lib/issues"
 
 [tool.bumpver]
 current_version = "0.4.2"
@@ -61,9 +61,3 @@ pikvm_lib = ["keymap.csv", "keymap_shift.csv"]
     "{pep440_version}",
 ]
 "src/pikvm_lib/__init__.py" = ["{version}"]
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-pikvm_lib = ["*.csv"]
